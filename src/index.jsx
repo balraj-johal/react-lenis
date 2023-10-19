@@ -52,10 +52,7 @@ export function useLenis(callback, deps = [], priority = 0) {
 }
 
 /**
- * @param {boolean=} [root] Whether Lenis will be initialized on document.documentElement
- * @param {ReactLenisOptions} [options={}] Lenis options {@link ReactLenisOptions}
- * @param {boolean=} [autoRaf=true] Whether to call Lenis.raf automatically on every frame
- * @param {number=} [rafPriority=0] Priority of Lenis.raf call (lower priority callbacks are called first)
+ * @type {React.FC<ReactLenisPropTypes>}
  */
 const ReactLenis = forwardRef(
   ({ children, root = false, options = {}, autoRaf = true, rafPriority = 0, className, ...props }, ref) => {
@@ -147,17 +144,30 @@ const ReactLenis = forwardRef(
     )
   },
 )
+
 ReactLenis.displayName = 'ReactLenis'
 
-ReactLenis.propTypes = {
+const ReactLenisPropTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
   root: PropTypes.bool,
   options: PropTypes.object,
   autoRaf: PropTypes.bool,
   rafPriority: PropTypes.number,
 }
 
+ReactLenis.propTypes = ReactLenisPropTypes
+
 export { ReactLenis, ReactLenis as Lenis }
+
+/**
+ * @typedef {Object} ReactLenisProps
+ * 
+ * @param {boolean=} [root] Whether Lenis will be initialized on document.documentElement
+ * @param {ReactLenisOptions} [options={}] Lenis options {@link ReactLenisOptions}
+ * @param {boolean=} [autoRaf=true] Whether to call Lenis.raf automatically on every frame
+ * @param {number=} [rafPriority=0] Priority of Lenis.raf call (lower priority callbacks are called first)
+ */
 
 /**
  * @callback EasingFunction
